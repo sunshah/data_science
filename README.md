@@ -15,6 +15,9 @@ environments.
 ### Environment Creation
 `conda create --name ecommerce`
 
+Environment creation from an existing requirement file
+`conda create -n ecommerce --file requirements`
+
 ### Listing Environments
 `conda info --envs`
 
@@ -26,4 +29,4 @@ environments.
 
 ### Exporting an Environment
 This exports all the packages installed in this environment
-`conda env export > <environment_name>.yml`
+`conda list -e > requirements`
