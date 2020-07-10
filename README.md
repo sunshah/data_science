@@ -26,7 +26,7 @@ environments.
 
 ### Deactivate an Environment
 This will deactivate the environment for the currently active environment
-'conda deactivate
+`conda deactivate`
 
 ### Install a Package in Environment
 `conda install <pkg_name>`
