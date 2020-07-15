@@ -1,29 +1,28 @@
 # Introduction
 
-This repository contains EDA and models for BoffinAI.
+This directory contains EDA and models for e-commerce recommendations.
 
+# Environment Setup
 
-# Setup(OSX)
+Environment creation from an existing requirement file
+`conda create -n ecommerce --file requirements`
 
-## Conda Environment Setup
-Conda is a virtual environment used to isolate packages for dev/production
-environments. 
-
-### Install
-[Installation Guide](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html)
-
-### Environment Creation
-`conda create --name ecommerce`
-
-### Listing Environments
+## Listing Environments
+Ensure newly created `ecommerce` environment exists
 `conda info --envs`
 
-### Activating an Environment
-`conda activate <environment_name>`
+## Activating Environment
+`conda activate ecommerce`
 
-### Install a Package in Environment
-`conda install <pkg_name>`
+## Exporting Environment
+This exports all the packages installed in this environment. Please update
+requirements if you install new packages
+`conda list -e > requirements`
 
-### Exporting an Environment
-This exports all the packages installed in this environment
-`conda env export > <environment_name>.yml`
+# Data Acquisition
+These instructions are to obtain the dataset that is explored further in the Jupyter notebook files.
+- Create a new folder called `Data` and navigate into it
+- Download the data from [data source](https://www.kaggle.com/mkechinov/ecommerce-events-history-in-cosmetics-shop?select=2019-Nov.csv) into the Data folder
+	* You should download all the datafiles at that location (including `2019-Oct, 2019-Nov, 2019-Dec, 2020-Jan, and 2020-Feb`)
+	* Alternatively, you may download only `2019-Nov` since that is what is analyzed in the Jupyter notebooks.
+- The `Data` folder is part of the .gitignore hence it is not included in any commits made. This is done to make our commits lightweight.
