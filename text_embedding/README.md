@@ -22,6 +22,6 @@ requirements if you install new packages
 # Data Acquisition
 These instructions are to obtain the dataset that is explored further in the Jupyter notebook files.
 - Create a new folder called `data` and navigate into it
-- Download the data from [data source](https://www.kaggle.com/cclark/product-item-data/download) into the data folder
-- Rename the csv file to `ecommerce_product_listing.csv`
+- We'll be using a text similarity dataset from [Kaggle](https://www.kaggle.com/rishisankineni/text-similarity?select=train.csv). Download the dataset (`train.csv` and `test.csv`) to a directory named `data`. 
+- Once you have a satisfactory model, test your model on an e-commerce [Kaggle](https://www.kaggle.com/cclark/product-item-data) dataset. Download the data to the `data` directory and rename file to `ecommerce_product_listing.csv`. You may need to update your methodology for the new dataset.
 - The `data` folder is part of the .gitignore hence it is not included in any commits made. This is done to make our commits lightweight.
