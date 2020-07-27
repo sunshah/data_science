@@ -1,0 +1,87 @@
+# This file may be used to create an environment using:
+# $ conda create --name <env> --file <this file>
+# platform: windows
+appnope==0.1.0
+attrs==19.3.0
+backcall==0.2.0
+bleach==3.1.5
+certifi==2020.6.20
+cycler==0.10.0
+decorator==4.4.2
+defusedxml==0.6.0
+entrypoints==0.3
+importlib-metadata==1.6.1
+intel-openmp==2019.0
+ipykernel==5.3.0
+ipython==7.16.1
+ipython_genutils==0.2.0
+jedi==0.15.2
+jinja2==2.11.2
+jsonschema==3.2.0
+jupyter_client==6.1.5
+jupyter_core==4.6.3
+kiwisolver==1.2.0
+markupsafe=1.1.0
+matplotlib==3.3.0
+mistune==0.8.4
+mkl==2019.0
+mkl_fft==1.0.6
+mkl_random==1.0.1.1
+nbconvert==5.6.1
+nbformat==5.0.7 
+notebook==6.0.3
+numpy==1.19.0
+openssl==1.1.1g
+packaging==20.4
+pandas==1.0.5
+pandoc==2.10
+pandocfilters==1.4.2
+parso==0.7.0
+pexpect==4.8.0
+pickleshare==0.7.5
+pip==20.1.1 #had to use conda install
+prometheus_client==0.8.0
+prompt-toolkit==3.0.5
+ptyprocess==0.6.0
+pygments==2.6.1
+pyparsing==2.4.7
+pyrsistent==0.16.0
+python==3.6.10
+python-dateutil==2.8.1
+pytz==2020.1
+pyzmq==19.0.1
+readline==6.2.4.1
+scipy==1.5.1
+seaborn=0.10.1
+send2trash==1.5.0
+setuptools==49.2.0
+six==1.15.0
+sqlite==3.32.3
+terminado==0.8.3
+testpath==0.4.4
+tk==0.1.0
+tornado==6.0.4 
+traitlets==4.3.3
+wcwidth==0.2.5
+webencodings==0.5.1
+wheel==0.34.2
+zeromq==4.3.2
+zipp==3.1.0
+zlib==1.2.11.1
+
+# These packages could not be found
+# blas=1.0=mkl
+# ca-certificates=2020.1.1=0
+# freetype=2.10.2=ha233b18_0
+# libcxx=10.0.0=1
+# libedit=3.1.20191231=haf1e3a3_0
+# libffi=3.3=h0a44026_1
+# libgfortran=3.0.1=h93005f0_2
+# libpng=1.6.37=ha441bb4_0
+# libsodium=1.0.18=h1de35cc_0
+# matplotlib-base=3.2.2=py38h5670ca0_0
+# mkl-service=2.3.0=py38hfbe908c_0
+# nb_conda_kernels=2.2.3
+# ncurses=6.2  --install
+# numpy-base=1.18.5  --install
+# xz=5.2.5=h1de35cc_0
