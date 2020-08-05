@@ -5,6 +5,18 @@ Data science repository
 
 This repository contains EDA and models for BoffinAI.
 
+# Git
+Give an overview of how Git works with Github
+- ssh is used to communicate between client (local Git client) and server (Github)
+- Test connectivity use command `ssh -vv git@github.com`
+## Setup
+Give an overview
+## Git Workflow
+
+# VIM
+What is VIM?
+## Basic VIM Commands
+- `j/k` - move up/down
 
 # Setup(OSX)
 
