@@ -121,8 +121,21 @@ The idea is that a single large commit keeps the master branch neater than lots 
         $ git add .
         # Commit files
         $ git commit -m "<message>"
-    Commit the staged snapshot regularly. Instead of launching a text editor, use `<message>` as a description of this commit. 
-3. 
+        # Push local branch to remote
+        $ git push -u origin <branch>
+    Commit the staged snapshot regularly. Instead of launching a text editor, you can use `<message>` as a description of this commit. 
+3. Checkout and pull from master branch:
+
+        $ git checkout master
+        $ git pull origin master
+4. Merge your changes and push:
+
+        # Merge <branch> INTO master
+        $ git merge <branch>
+    The changes from the `<branch>` are now merged into your `master` brach. Push your changes to the remote master branch:
+
+        # Push the local master to the remote master
+        $ git push origin master
 
 ## Editing your .bashrc
 The `.bashrc` is a file which is called by bash on each start of a new interactive shell. The file can be used to setup the environment, export variables, create aliases and functions and more:
