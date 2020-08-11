@@ -5,6 +5,29 @@ Data science repository
 
 This repository contains EDA and models for BoffinAI.
 
+## Shortcuts
+- [Connecting to GitHub with SSH](#connecting-to-github-with-ssh)
+    - [About SSH](#about-ssh)
+    - [Checking for existing SSH keys](#checking-for-existing-ssh-keys)
+    - [Generating a new SSH key](#generating-a-new-ssh-key)
+    - [Add your public key to GitHub](#add-your-public-key-to-github)
+    - [Add your private key to the ssh-agent](#add-your-private-key-to-the-ssh-agent)
+    - [Testing your SSH connectivity](#testing-your-ssh-connectivity)
+- [Git Workflow](#git-workflow)
+    - [Begin Workflow](#begin-workflow)
+    - [Day to day Workflow](#day-to-day-workflow)
+    - [Useful Git Commands](#useful-git-commands)
+    - [Display git branch in bash prompt](#display-git-branch-in-bash-prompt)
+- [Basic UNIX Commands](#basic-unix-commands)
+- [Vim](#vim)
+    - [Vim modes](#vim-modes)
+    - [Basic Vim commands](#basic-vim-commands)
+    - [Vim commands for movement](#vim-commands-for-movement)
+    - [Vim commands for editing](#vim-commands-for-editing)
+    - [Vim commands for searching text](#vim-commands-for-searching-text)
+- [Setup(Conda)(OSX)](#setup(conda)(osx))
+- [Setup(Conda)(Windows)](#setup(conda)(windows))
+
 # Connecting to GitHub with SSH
 
 ## About SSH
@@ -17,8 +40,7 @@ Before you generate an SSH key, you can check to see if you already have any SSH
 1. Open Terminal.
 2. List the contents of your `.ssh` directory: 
 
-        $ cd ~/.ssh   
-        $ ls
+        $ ls .ssh   
 3. Check the directory listing to see if you already have a public SSH key. If you see `id_rsa.pub`, you already have a key pair and don't need to create one.
 
 If your keys already exist, skip ahead to the **Add your public key to GitHub** section below.
@@ -102,17 +124,15 @@ Git helps keep track of changes in code and allows for collaboration on projects
 8. Clone the repo to local machine:  
 
         $ git clone https://github.com/user_name/repo_name.git
-    By cloning the repo, you're creating a local copy of it. A folder will appear in your workspace directory that is a copy of the cloned rep.
+    By cloning the repo, you're creating a local copy of it. A folder will appear in your workspace directory that is a copy of the cloned repo.
 
-## Day-to-day Workflow
+## Day to day Workflow
 A git workflow process is seen by many as essential for any project. A common workflow looks like:  
 - Check out new branch.
 - Work on that branch, making several commits.
 - Merge changes back into the master branch in a single, curated commit.  
 
-The idea is that a single large commit keeps the master branch neater than lots of small commits. Let's go through each step in more detail.  
-
-1. Create a new branch to work on:
+1. Create a new working branch from `master` to work on:
 
         $ git checkout -b <branch>
 2. Write code, commit regularly:
@@ -124,36 +144,132 @@ The idea is that a single large commit keeps the master branch neater than lots 
         # Push local branch to remote
         $ git push -u origin <branch>
     Commit the staged snapshot regularly. Instead of launching a text editor, you can use `<message>` as a description of this commit. 
-3. Checkout and pull from master branch:
+3. Depending on how long you've been working on your working branch and how large your team is, the local `master` branch of your project may be out of sync from the origin. Checkout and pull the latest version from `master`:
 
+        # Move into local master branch
         $ git checkout master
+        # Make sure local master is up-to-date
         $ git pull origin master
-4. Merge your changes and push:
+    This will fetch and merge any changes on the remote repo into the local `master` branch with all the changes.  
+4. Checkout your working branch and merge any changes made from your team into your working branch:  
 
-        # Merge <branch> INTO master
-        $ git merge <branch>
-    The changes from the `<branch>` are now merged into your `master` brach. Push your changes to the remote master branch:
+        $ git checkout <branch>
+        # Merge master INTO <branch>
+        $ git merge master
 
-        # Push the local master to the remote master
-        $ git push origin master
+## Useful Git Commands
+### Git Basics
+- `git clone <repo>` - Clone repo located at `<repo>` onto local machine. Original repo can be located on the local filesystem or on a remote machine via HTTP or SSH.
+- `git config user.name <name>` - Define author name to be used for all commits in current repo. Devs commonly use `--global` flag to set config options for current user.
+- `git config user.name <email>` - Define author email to be used for all commits in current repo. Devs commonly use `--global` flag to set config options for current user.
+- `git add <directory>` - Stage all changes in `<directory>` for the next commit. Replace `<directory>` with a `<file>` to change a specific file.
+- `git commit -m "<message>"` - Commit the staged snapshot, but instead of launching a text editor, use `<message>` as the commit message.
+- `git status` - List which files are staged, unstaged, and untracked.
+- `git log` - Display the entire commit history using the default format.
+- `git diff` - Show unstaged changes between your index and working directory.
 
-## Editing your .bashrc
+### Git Branches
+- `git branch` - List all of the branches in your repo. Add a `<branch>` argument to create a new branch with the name `<branch>`.
+- `git checkout -b <branch>` - Create and checkout new branch named `<branch>`. Drop the `-b` flag to checkout an existing branch.
+- `git merge <branch>` - Merge `<branch>` into the current branch.
+
+### Remote Repositories
+- `git pull <remote>` - Fetch the specified remote's copy of current branch and immediately merge it into the local copy.
+- `git push <remote> <branch>` - Push the branch to `<remote>`, along with necessary commits and objects. Creates named branch in the remote repo if it doesn't exist.
+
+## Display git branch in bash prompt
 The `.bashrc` is a file which is called by bash on each start of a new interactive shell. The file can be used to setup the environment, export variables, create aliases and functions and more:
 
 1. In order to edit the file, type:
 
         $ vi ~/.bashrc
-2. Once you managed to edit the file, start a new connection or simply type:
+2. Add this to `~./bashrc` :
+
+        parse_git_branch() {
+             git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \
+        (.*\)/(\1)/'
+        }
+
+        export PS1="\u@\h \[\e[32m\]\w \[\e[91m\]\$(parse_git_branch)\
+        [\e[00m\]$ "
+3. Once you managed to edit the file, start a new connection or simply type:
 
         $ source ~/.bashrc
-    The setting you added should now be a part of your bash shell environment.
+    The setting adds the current git branch name in bash prompt with *highlighted color*. This helps developers avoid a lot of problems with working on wrong git branches.
 
-# VIM
-What is VIM?
-## Basic VIM Commands
-- `j/k` - move up/down
+# Basic UNIX Commands
+- `mkdir [name]` -  Makes a new directory called *name*
+- `mkdir -p [level1/level2/…]` - Allows you to create a series of nested directories
+- `pwd` - Prints working directory
+- `ls` - Lists contents of a directory
+- `ls -l` - Lists contents of directory & provides add. info about file/dir
+- `mv [src] [dest]` - Move a file/dir called *src* to a file/dir called *dest*
+- `rm [file]` - Deletes/removes a file
+- `rm -r [dir]` - Recursively deletes contents of a directory; must include **-r**
+- `cd`- Used to change directory you are currently located in
+- `~` - Refers to home dir
+- `..` - Refers to dir above current one
+- `cd ..` - Goes to dir above the current one
+- `cd ~` - Goes to home directory
+- `g++ -o [filename] [filename.cpp]` - Compiles source file
+- `g++ [filename.cpp]` - Compiles program into a file called a.out
+- `./[filename]` - Used to execute compiled program
 
-# Setup(OSX)
+# Vim
+Vim is a highly configurable text editor built to make creating and changing any kind of text very efficient. It is included as `vi` with most UNIX systems and with Apple OS X. 
+
+## Vim modes
+Vim has two modes:
+1. **Command Mode**: This is the default mode that you'll be in once you open Vim. If you're in a different mode and want to go back to command mode, just hit `<Esc>`. This mode allows you to use Vim commands and move through your document.
+
+2. **Insert Mode**: This mode allows you to enter text into your document. You can enter insert mode by pressing the `i` key.
+
+## Basic Vim commands
+- `:w` - Saves the file you are working on
+- `:w [filename]` - Allows you to save your file with the name you defined
+- `:wq` - Save your file and close Vim
+- `:q!` - Quit without saving the file
+- `:e [file]` - Opens a file, where [file] is the name of the file you want to open
+
+## Vim commands for movement
+- `j` - Move the curson down one line
+- `k` - Move the cursor up one line
+- `l` - Move the cursor to the right
+- `h` - Move the cursor to the left
+- `w` - Puts the cursor at the start of the next word
+- `b` - Puts the cursor at the start of the previous word
+- `e` - Puts the cursor at the end of a word
+- `0` - Places the cursor at the beginning of a line
+- `$` - Places the cursor at the end of a line
+- `(` - Takes your to the start of the previous sentence
+- `)` - Takes you to the start of the next sentence
+
+## Vim commands for editing
+- `yy` - Copies a line
+- `yw` - Copies a word
+- `y$` - Copies from where your cursor is to the end of a line
+- `v` - Highlights one character at a time using arrow buttons of the h, k, j, l buttons
+- `V` - Highlights one line, and movement keys can allow you to highlight additional lines
+- `p` - Paste whatever has been copied
+- `d` - Deletes highlighted text
+- `dd` - Deletes a line of text
+- `dw` - Deletes a word
+- `D` - Deletes everything from where your cursor is to the end of the line
+- `d0` - Deletes everything from where your cursor is to the beginning of the file
+- `dG` - Deletes everything from where your cursor is to the end of the file
+- `x` - Deletes a single character
+- `u` - Under the last operation
+- `<Ctrl> + r` - Redo the last undo
+- `.` - Repeats the last action
+
+## Vim commands for searching text
+- `/[keyword]` - Searches for keyword in the text
+- `n` - Searches you text again in whatever direction your last search was
+- `N` - Searches your text again in the opposite direction
+- `:%s/[pattern]/[replacement]/g` - Replaces all occurences of [pattern] with [replacement] all at once
+- `:%s/[pattern]/[replacement]/gc` - Replaces all occurences of [pattern] with [replacement] one at a time
+
+# Setup(Conda)(OSX)
 
 ## Conda Environment Setup
 Conda is a virtual environment used to isolate packages for dev/production
