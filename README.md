@@ -16,7 +16,9 @@ This repository contains EDA and models for BoffinAI.
 - [Git Workflow](#git-workflow)
     - [Begin Workflow](#begin-workflow)
     - [Day to day Workflow](#day-to-day-workflow)
+    - [Useful Git Commands](#useful-git-commands)
     - [Display git branch in bash prompt](#display-git-branch-in-bash-prompt)
+- [Basic UNIX Commands](#basic-unix-commands)
 - [Vim](#vim)
     - [Vim modes](#vim-modes)
     - [Basic Vim commands](#basic-vim-commands)
@@ -38,8 +40,7 @@ Before you generate an SSH key, you can check to see if you already have any SSH
 1. Open Terminal.
 2. List the contents of your `.ssh` directory: 
 
-        $ cd ~/.ssh   
-        $ ls
+        $ ls .ssh   
 3. Check the directory listing to see if you already have a public SSH key. If you see `id_rsa.pub`, you already have a key pair and don't need to create one.
 
 If your keys already exist, skip ahead to the **Add your public key to GitHub** section below.
@@ -131,9 +132,7 @@ A git workflow process is seen by many as essential for any project. A common wo
 - Work on that branch, making several commits.
 - Merge changes back into the master branch in a single, curated commit.  
 
-The idea is that a single large commit keeps the master branch neater than lots of small commits. Let's go through each step in more detail.  
-
-1. Create a new branch to work on:
+1. Create a new working branch from `master` to work on:
 
         $ git checkout -b <branch>
 2. Write code, commit regularly:
@@ -145,21 +144,38 @@ The idea is that a single large commit keeps the master branch neater than lots 
         # Push local branch to remote
         $ git push -u origin <branch>
     Commit the staged snapshot regularly. Instead of launching a text editor, you can use `<message>` as a description of this commit. 
-3. Checkout and pull from master branch:
+3. Depending on how long you've been working on your working branch and how large your team is, the local `master` branch of your project may be out of sync from the origin. Checkout and pull the latest version from `master`:
 
         # Move into local master branch
         $ git checkout master
         # Make sure local master is up-to-date
         $ git pull origin master
-4. Merge your changes and push:
+    This will fetch and merge any changes on the remote repo into the local `master` branch with all the changes.  
+4. Checkout your working branch before merging `master`:  
 
-        # Merge <branch> INTO local master
-        $ git merge <branch>
-    The changes from the `<branch>` are now merged into your local master branch. Push your changes to the remote master branch:
+        $ git checkout <branch>
+        # Merge master INTO <branch>
+        $ git merge master
 
-        # Push the local master to the remote master
-        $ git push origin master
-    You should now see your changes in your GitHub repository.
+## Useful Git Commands
+### Git Basics
+- `git clone <repo>` - Clone repo located at `<repo>` onto local machine. Original repo can be locatedon the local filesystem or on a remote machine via HTTP or SSH.
+- `git config user.name <name>` - Define author name to be used for all commits in current repo. Devs commonly use `--global` flag to set config options for current user.
+- `git config user.name <email>` - Define author email to be used for all commits in current repo. Devs commonly use `--global` flag to set config options for current user.
+- `git add <directory>` - Stage all changes in `<directory>` for the next commit. Replace `<directory>` with a `<file>` to change a specific file.
+- `git commit -m "<message>"` - Commit the staged snapshot, but instead of launching a text editor, use `<message>` as the commit message.
+- `git status` - List which files are staged, unstaged, and untracked.
+- `git log` - Display the entire commit history using the default format.
+- `git diff` - Show unstaged changes between your index and working directory.
+
+### Git Branches
+- `git branch` - List all of the branches in your repo. Add a `<branch>` argument to create a new branch with the name `<branch>`.
+- `git checkout -b <branch>` - Create and checkout new branch named `<branch>`. Drop the `-b` flag to checkout an existing branch.
+- `git merge <branch>` - Merge `<branch>` into the current branch.
+
+### Remote Repositories
+- `git pull <remote>` - Fetch the specified remote's copy of current branch and immediately merge it into the local copy.
+- `git push <remote> <branch>` - Push the branch to `<remote>`, along with necessary commits and objects. Creates named branch in the remote repo if it doesn't exist.
 
 ## Display git branch in bash prompt
 The `.bashrc` is a file which is called by bash on each start of a new interactive shell. The file can be used to setup the environment, export variables, create aliases and functions and more:
@@ -181,6 +197,24 @@ The `.bashrc` is a file which is called by bash on each start of a new interacti
         $ source ~/.bashrc
     The setting adds the current git branch name in bash prompt with *highlighted color*. This helps developers avoid a lot of problems with working on wrong git branches.
 
+# Basic UNIX Commands
+- `mkdir [name]` -  Makes a new directory called *name*
+- `mkdir -p [level1/level2/…]` - Allows you to create a series of nested directories
+- `pwd` - Prints working directory
+- `ls` - Lists contents of a directory
+- `ls -l` - Lists contents of directory & provides add. info about file/dir
+- `mv [src] [dest]` - Move a file/dir called *src* to a file/dir called *dest*
+- `rm [file]` - Deletes/removes a file
+- `rm -r [dir]` - Recursively deletes contents of a directory; must include **-r**
+- `cd`- Used to change directory you are currently located in
+- `~` - Refers to home dir
+- `..` - Refers to dir above current one
+- `cd ..` - Goes to dir above the current one
+- `cd ~` - Goes to home directory
+- `g++ -o [filename] [filename.cpp]` - Compiles source file
+- `g++ [filename.cpp]` - Compiles program into a file called a.out
+- `./[filename]` - Used to execute compiled program
+
 # Vim
 Vim is a highly configurable text editor built to make creating and changing any kind of text very efficient. It is included as `vi` with most UNIX systems and with Apple OS X. 
 
@@ -193,7 +227,7 @@ Vim has two modes:
 ## Basic Vim commands
 - `:w` - Saves the file you are working on
 - `:w [filename]` - Allows you to save your file with the name you defined
-- `:wq` - Save you file and close Vim
+- `:wq` - Save your file and close Vim
 - `:q!` - Quit without saving the file
 - `:e [file]` - Opens a file, where [file] is the name of the file you want to open
 
