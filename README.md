@@ -151,7 +151,7 @@ A git workflow process is seen by many as essential for any project. A common wo
         # Make sure local master is up-to-date
         $ git pull origin master
     This will fetch and merge any changes on the remote repo into the local `master` branch with all the changes.  
-4. Checkout your working branch before merging `master`:  
+4. Checkout your working branch and merge any changes made from your team into your working branch:  
 
         $ git checkout <branch>
         # Merge master INTO <branch>
@@ -159,7 +159,7 @@ A git workflow process is seen by many as essential for any project. A common wo
 
 ## Useful Git Commands
 ### Git Basics
-- `git clone <repo>` - Clone repo located at `<repo>` onto local machine. Original repo can be locatedon the local filesystem or on a remote machine via HTTP or SSH.
+- `git clone <repo>` - Clone repo located at `<repo>` onto local machine. Original repo can be located on the local filesystem or on a remote machine via HTTP or SSH.
 - `git config user.name <name>` - Define author name to be used for all commits in current repo. Devs commonly use `--global` flag to set config options for current user.
 - `git config user.name <email>` - Define author email to be used for all commits in current repo. Devs commonly use `--global` flag to set config options for current user.
 - `git add <directory>` - Stage all changes in `<directory>` for the next commit. Replace `<directory>` with a `<file>` to change a specific file.
