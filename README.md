@@ -33,7 +33,7 @@ This repository contains EDA and models for BoffinAI.
 ## About SSH
 With SSH keys, you can connect and communicate between client (local Git client) and remote server (GitHub). An SSH key is an alternative way to connect to GitHub without supplying your username and password at each visit.
 
-SSH keys come in pairs, a public key that gets shared with services like GitHub, and a private key that is stored only on your computer. If they keys match, you're granted access.
+SSH keys come in pairs, a public key that gets shared with services like GitHub, and a private key that is stored only on your computer. If the keys match, you're granted access.
 
 ## Checking for existing SSH keys
 Before you generate an SSH key, you can check to see if you already have any SSH keys on your machine. You can check to see if any exist by moving into your `.ssh` directory and listing its contents:  
@@ -141,8 +141,6 @@ A git workflow process is seen by many as essential for any project. A common wo
         $ git add .
         # Commit files
         $ git commit -m "<message>"
-        # Push local branch to remote
-        $ git push -u origin <branch>
     Commit the staged snapshot regularly. Instead of launching a text editor, you can use `<message>` as a description of this commit. 
 3. Depending on how long you've been working on your working branch and how large your team is, the local `master` branch of your project may be out of sync from the origin. Checkout and pull the latest version from `master`:
 
@@ -156,6 +154,12 @@ A git workflow process is seen by many as essential for any project. A common wo
         $ git checkout <branch>
         # Merge master INTO <branch>
         $ git merge master
+5. Finally, push your local working branch to your remote working branch.
+
+        # Push local branch to remote
+        $ git push -u origin <branch>
+6. Open a Pull Request for changes to the working branch.
+7. Merge your Pull Request.
 
 ## Useful Git Commands
 ### Git Basics
